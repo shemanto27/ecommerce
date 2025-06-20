@@ -6,3 +6,6 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product
         fields = '__all__'
         read_only_fields = ['id']
+
+class ProductCreateSerializer(serializers.Serializer):
+    product_id = serializers.IntegerField()
