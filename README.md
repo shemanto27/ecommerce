@@ -4,7 +4,10 @@ This is a simple e-commerce backend built using Django & DRF with Stripe integra
 
 ## Features
 
-- ✅ Product CRUD API - Only Admin can add, update or delete products bu any one can read
+- ✅ Product CRUD API
+    - Admins ➝ can create, update, delete products
+    - Authenticated users ➝ can view products and place orders (checkout)
+    - Unauthenticated users ➝ can view products (read-only)
 - ✅ JWT-based user registration, login & logout via Djoser
 - ✅ Custom user model using `email` as login
 - ✅ Stripe Checkout integration (returns session URL)
