@@ -1,4 +1,5 @@
 from decouple import config
+from datetime import timedelta
 
 from pathlib import Path
 
@@ -33,9 +34,12 @@ EXTERNAL_APPS = [
     # 3rd party apps
     'rest_framework',
     'drf_yasg',
+    'djoser',
+
 
     # Local apps
     'app_products',
+    'app_users',
 ]
 
 INSTALLED_APPS += EXTERNAL_APPS
@@ -51,6 +55,44 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# Custom user model
+AUTH_USER_MODEL = 'app_users.User'
+
+# JWT and Djoser settings
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ),
+}
+
+
+
+DJOSER = {
+    'USER_ID_FIELD': 'id',
+    'LOGIN_FIELD': 'email',
+    'USER_CREATE_PASSWORD_RETYPE': True,    
+    'SERIALIZERS': {
+        'user_create': 'app_users.serializers.UserCreateSerializer',
+        'user': 'app_users.serializers.UserSerializer',
+        'current_user': 'app_users.serializers.UserSerializer',
+    },
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),      # Short lifespan for access tokens
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=31),        # Duration a refresh token is valid
+    'ROTATE_REFRESH_TOKENS': True,                      # Issue a new refresh token on each refresh
+    'BLACKLIST_AFTER_ROTATION': True,                   # Disable old refresh tokens (requires blacklist app)
+    'AUTH_HEADER_TYPES': ('Bearer', 'JWT'),             # Supported auth header prefixes :contentReference[oaicite:2]{index=2}
+}
+
+
+
+
 
 ROOT_URLCONF = 'core.urls'
 
