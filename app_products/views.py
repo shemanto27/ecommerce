@@ -2,6 +2,7 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 
 import stripe
 from django.conf import settings
@@ -20,6 +21,8 @@ class ProductViewSet(ModelViewSet):
 
 
 class CreateCheckoutSessionView(APIView):
+    permission_classes = [IsAuthenticated]
+
     @swagger_auto_schema(request_body=ProductCreateSerializer)
     def post(self, request, *args, **kwargs):
         serializer = ProductCreateSerializer(data=request.data)
