@@ -4,14 +4,21 @@ This is a simple e-commerce backend built using Django & DRF with Stripe integra
 
 ## Features
 
-- ✅ Product CRUD API
-    - Admins ➝ can create, update, delete products
-    - Authenticated users ➝ can view products and place orders (checkout)
-    - Unauthenticated users ➝ can view products (read-only)
-- ✅ JWT-based user registration, login & logout via Djoser
-- ✅ Custom user model using `email` as login
-- ✅ Stripe Checkout integration (returns session URL)
-- ✅ Swagger UI for API documentation
+- 🔐 **User Authentication**
+  - JWT-based login/register using **Djoser + Simple-JWT**
+  - Custom user model (login with email only)
+
+- 📦 **Product Management**
+  - Admins ➝ Full CRUD (Create, Update, Delete)
+  - Authenticated users ➝ View & Checkout
+  - Unauthenticated users ➝ View only
+
+- 💳 **Stripe Integration**
+  - Secure Checkout session generation
+  - Stripe test key support (no real payments)
+
+- 📘 **API Documentation**
+  - Swagger & ReDoc support for live testing
 
 ## Tech Stack
 
@@ -32,12 +39,14 @@ or
 http://localhost:8000/api/redoc # ReDoc UI 
 
 ```
-Usage:
-Click "Authorize" and paste your JWT access token (Bearer <token>)
+# 🪪 To authorize:
+Click "Authorize", and paste your JWT:
+```
+Bearer <your_access_token>
+```
+Then access all protected routes like checkout, product creation, etc.
 
-Use the endpoints directly: register, login, checkout, etc.
-
-# 📍Naming Conventions
+# 📁 Naming Conventions
 
 All Django apps are named using the format:
 
@@ -53,20 +62,19 @@ app_products: manages product listing and checkout logic.
 
 
 
-# 🔐API Usage
+# 🔐 API Usage
 
-### Register
+### 👤 Register
 `POST /api/auth/users/`
 ```json
 {
   "email": "test@mail.com",
-  "full_name": "Test User",
   "password": "yourpass123",
   "re_password": "yourpass123"
 }
 ```
 
-### Login (JWT)
+### 🔑 Login (JWT)
 `POST /api/auth/jwt/create/`
 
 ```json
@@ -76,7 +84,7 @@ app_products: manages product listing and checkout logic.
 }
 ```
 
-### Create Checkout Session (JWT required)
+### 🛒 Create Checkout Session (JWT required)
 `POST /api/create-checkout-session/`
 
 ```json
@@ -85,7 +93,7 @@ app_products: manages product listing and checkout logic.
 }
 ```
 
-### Product CRUD
+### 📦 Product CRUD
 `GET /api/products/`
 
 `POST /api/products/ (admin only)`
@@ -106,10 +114,10 @@ app_products: manages product listing and checkout logic.
 `DELETE /api/products/{id}`
 
 
-# Required Enviroment Variables
+# 🔑 Required Enviroment Variables
 - `STRIPE_SECRET_KEY` - stripe test key
 
-# ⚙️Setup & Run
+# 🚀 Setup & Run
 ### ✅ Clone the repository
 ```git clone https://github.com/shemanto27/ecommerce.git```
 
@@ -136,6 +144,7 @@ app_products: manages product listing and checkout logic.
 `create user` --> `login/generate token` --> `Authorize` --> `checkout session `
 
 # ℹ️Note:
-- This project uses uv (a fast, modern Python package manager). To install dependencies, run uv sync — no need for pip or requirements.txt.
+- This project uses uv, a modern Python package manager — no need for requirements.txt.
 - Stripe keys are in test mode.
+- Admin rights (is_staff=True) are required for creating/updating/deleting products.
 - Project is modular and clean for easy scaling.
