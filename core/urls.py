@@ -11,9 +11,7 @@ schema_view = get_schema_view(
         title="Ecommerce API",
         default_version='v1',
         description="Ecommerce API documentation, providing endpoints for user management, product management, and more.",
-        terms_of_service="https://www.google.com/policies/terms/",
-        contact=openapi.Contact(email="shemantosharkarofficial@gmail.com"),
-        license=openapi.License(name="BSD License"),
+        
     ),
     public=True,
     permission_classes=(permissions.AllowAny,),

@@ -4,7 +4,7 @@ This is a simple e-commerce backend built using Django & DRF with Stripe integra
 
 ## Features
 
-- ✅ Product CRUD API
+- ✅ Product CRUD API - Only Admin can add, update or delete products bu any one can read
 - ✅ JWT-based user registration, login & logout via Djoser
 - ✅ Custom user model using `email` as login
 - ✅ Stripe Checkout integration (returns session URL)
@@ -102,6 +102,10 @@ app_products: manages product listing and checkout logic.
 
 `DELETE /api/products/{id}`
 
+
+# Required Enviroment Variables
+- `STRIPE_SECRET_KEY` - stripe test key
+
 # ⚙️Setup & Run
 ### ✅ Clone the repository
 ```git clone https://github.com/shemanto27/ecommerce.git```
@@ -111,11 +115,22 @@ app_products: manages product listing and checkout logic.
 ### ✅ Install dependencies using uv
 ```uv sync```
 
+### ✅ Activate Virtual Environment
+```source .venv/bin/activate```
+
 ### ✅ Apply migrations
 ```python manage.py migrate```
 
 ### ✅ Run the development server
 ```python manage.py runserver```
+
+### ✅ create superuser to add/delete/update products
+```python manage.py createsuperuser```
+
+### ✅ Go to Swagger api url for live testing
+```http://localhost:8000/api/docs/ ```
+
+`create user` --> `login/generate token` --> `Authorize` --> `checkout session `
 
 # ℹ️Note:
 - This project uses uv (a fast, modern Python package manager). To install dependencies, run uv sync — no need for pip or requirements.txt.

@@ -31,14 +31,14 @@ class User(AbstractBaseUser, PermissionsMixin):
         db_table = 'Users Table'
 
     email = models.EmailField(unique=True)
-    full_name = models.CharField(max_length=255)
+
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
     objects = CustomUserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['full_name']
+    REQUIRED_FIELDS = []
 
     def __str__(self):
         return self.email

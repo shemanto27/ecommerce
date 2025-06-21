@@ -169,3 +169,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Stipe settings
 STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY')
+
+
+# Swagger settings
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header',
+            'description': 'JWT Authorization header using the Bearer scheme. Example: Bearer *your_token*',
+        }
+    },
+    'USE_SESSION_AUTH': False,  # disables login via username/password
+}
