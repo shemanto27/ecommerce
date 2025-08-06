@@ -2,6 +2,8 @@
 
 This is a simple e-commerce backend built using Django & DRF with Stripe integration and JWT auth via Djoser+Simple-JWT.
 
+https://drive.google.com/file/d/1gHfoZOTabpknJExrRhg5BcX5oxjHJ2ir/view?usp=sharing
+
 ## Features
 
 - 🔐 **User Authentication**
