@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  backend:
+    container_name: ecommerce-backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: uv run python manage.py runserver 0.0.0.0:8000  # <-- dev server, auto-reload
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      - .:/app   # <-- mount your current folder into /app in the container
+      - /app/.venv   # <-- prevent overwriting the venv by the bind mount    
+#     networks:
+#       - app-network
+
+
+# networks:
+#   app-network:
+#     driver: bridge

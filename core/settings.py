@@ -1,3 +1,4 @@
+import os
 from decouple import config
 from datetime import timedelta
 
@@ -16,7 +17,7 @@ SECRET_KEY = 'django-insecure-+7!t05=u_w-hp=@i8zl=rlu3gaayyhtsr@3g8wh%pp=yz(7e%p
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*", "localhost", "127.0.0.1"]
 
 
 # Application definition
@@ -183,3 +184,6 @@ SWAGGER_SETTINGS = {
     },
     'USE_SESSION_AUTH': False,  # disables login via username/password
 }
+
+STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
